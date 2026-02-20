@@ -41,27 +41,52 @@ public class OnBoardingTransactionHandlerApplication {
         SpringApplication.run(OnBoardingTransactionHandlerApplication.class, args);
     }
 
+//    @Bean
+//    public RestTemplate restTemplate() throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
+//
+//        TrustStrategy acceptingTrustStrategy = (X509Certificate[] chain, String authType) -> true;
+//
+//        SSLContext sslContext = org.apache.http.ssl.SSLContexts.custom()
+//                .loadTrustMaterial(null, acceptingTrustStrategy)
+//                .build();
+//
+//        SSLConnectionSocketFactory csf = new SSLConnectionSocketFactory(sslContext);
+//
+//
+//        RequestConfig config = RequestConfig.custom()
+//                .setConnectionRequestTimeout(300000)
+//                .setConnectTimeout(300000)
+//                .setSocketTimeout(300000)
+//                .build();
+//
+//        CloseableHttpClient httpClient = HttpClientBuilder.create()
+//                .setDefaultRequestConfig(config)
+//                .setSSLSocketFactory(csf)
+//                .build();
+//
+//        HttpComponentsClientHttpRequestFactory requestFactory =
+//                new HttpComponentsClientHttpRequestFactory();
+//
+//        RestTemplate restTemplate = new RestTemplate(requestFactory);
+//        OnBoardingTransactionHandlerApplication.restTemplate = restTemplate;
+//        return restTemplate;
+//    }
+
+
     @Bean
-    public RestTemplate restTemplate() throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
+    public RestTemplate restTemplate() {
 
-        TrustStrategy acceptingTrustStrategy = (X509Certificate[] chain, String authType) -> true;
-
-        SSLContext sslContext = org.apache.http.ssl.SSLContexts.custom()
-                .loadTrustMaterial(null, acceptingTrustStrategy)
-                .build();
-
-        SSLConnectionSocketFactory csf = new SSLConnectionSocketFactory(sslContext);
-
-        // ✅ Updated to use RequestConfig (timeout settings)
         RequestConfig config = RequestConfig.custom()
                 .setConnectionRequestTimeout(300000)
                 .setConnectTimeout(300000)
                 .setSocketTimeout(300000)
                 .build();
 
+
+
         CloseableHttpClient httpClient = HttpClientBuilder.create()
                 .setDefaultRequestConfig(config)
-                .setSSLSocketFactory(csf)
+
                 .build();
 
         HttpComponentsClientHttpRequestFactory requestFactory =
