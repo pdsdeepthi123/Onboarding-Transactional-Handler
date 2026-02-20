@@ -18,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
+import ug.daes.OnBoardingTransactionHandler.OnBoardingTransactionHandlerApplication;
 import ug.daes.OnBoardingTransactionHandler.dto.ApiResponse;
 import ug.daes.OnBoardingTransactionHandler.dto.template.RecordDto;
 
@@ -37,6 +38,8 @@ public class DeleteService {
 
 	/** The Constant CLASS. */
 	final static String CLASS = "DeleteService";
+
+	OnBoardingTransactionHandlerApplication application = new OnBoardingTransactionHandlerApplication();
 
 //	@Value("${onboarding.url}")
 //	private String baseUrl = "http://localhost:8081";
@@ -58,11 +61,11 @@ public class DeleteService {
 			recordDto = objectMapper.readValue(s, RecordDto.class);
 			
 			String url = baseUrl + "/api/get/delete-record?suid=" + (String) recordDto.getSuid();
-			RestTemplate rest = new RestTemplate();
+
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.APPLICATION_JSON);
 			HttpEntity<Object> requestEntity = new HttpEntity<>(headers);
-			res = rest.exchange(url, HttpMethod.DELETE, requestEntity, ApiResponse.class);
+			res = application.restTemplate.exchange(url, HttpMethod.DELETE, requestEntity, ApiResponse.class);
 			return exceptionHandlerUtil.handleResponse(res);
 
 		} catch (HttpClientErrorException e) {

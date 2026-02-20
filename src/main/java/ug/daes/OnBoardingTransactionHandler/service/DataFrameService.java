@@ -15,6 +15,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import ug.daes.OnBoardingTransactionHandler.OnBoardingTransactionHandlerApplication;
 import ug.daes.OnBoardingTransactionHandler.constant.ErrorCode;
 import ug.daes.OnBoardingTransactionHandler.constant.MethodConstant;
 import ug.daes.OnBoardingTransactionHandler.dto.ApiResponse;
@@ -30,6 +31,8 @@ public class DataFrameService {
 
 	/** The Constant CLASS. */
 	final static String CLASS = "DataFrameService";
+
+	OnBoardingTransactionHandlerApplication application = new OnBoardingTransactionHandlerApplication();
 
 	//@Autowired
 	//ExceptionHandlerUtil exceptionHandlerUtil = new ExceptionHandlerUtil();
@@ -141,12 +144,12 @@ public class DataFrameService {
 				//System.out.println(r);
 			}
 
-			RestTemplate rest = new RestTemplate();
+
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.APPLICATION_JSON);
 			HttpEntity<Object> requestEntity = new HttpEntity<>(headers);
 			String url = "http://ekyc.digitaltrusttech.com:90/ticket-service/api/ticket/generate";
-			res = rest.exchange(url, HttpMethod.POST, requestEntity, ApiResponse.class);
+			res = application.restTemplate.exchange(url, HttpMethod.POST, requestEntity, ApiResponse.class);
 			if (res.getStatusCodeValue() == 400 || res.getStatusCodeValue() == 401 || res.getStatusCodeValue() == 403 || res.getStatusCodeValue() == 404 || res.getStatusCodeValue() == 415 || res.getStatusCodeValue() == 500 || res.getStatusCodeValue() == 501 || res.getStatusCodeValue() == 503) {
 				return AppUtil.createApiResponse(false, "Something went wrong.Please try after sometime", (Object)null);
 			}
