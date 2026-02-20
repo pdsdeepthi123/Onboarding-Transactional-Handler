@@ -3,6 +3,8 @@ package ug.daes.OnBoardingTransactionHandler.service;
 import java.lang.reflect.Method;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -23,6 +25,11 @@ import ug.daes.OnBoardingTransactionHandler.util.AppUtil;
 
 @Service
 public class DataFrameService {
+
+	private static Logger log = LoggerFactory.getLogger(DataFrameService.class);
+
+	/** The Constant CLASS. */
+	final static String CLASS = "DataFrameService";
 
 	//@Autowired
 	//ExceptionHandlerUtil exceptionHandlerUtil = new ExceptionHandlerUtil();
@@ -147,34 +154,34 @@ public class DataFrameService {
 				return res.getBody();
 			}
 		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			final String errCode = ErrorCode.map.get("Illegal Argument Exception_AppConfig-service");
 			return AppUtil.createApiResponse(false,
 					"Something went wrong. Please try after sometimeCode(" + errCode + ")", (Object) null);
 		} catch (IllegalStateException e) {
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			final String errCode = ErrorCode.map.get("Illegal State Exception_AppConfig-service");
 			return AppUtil.createApiResponse(false,
 					"Something went wrong. Please try after sometimeCode(" + errCode + ")", (Object) null);
 		} catch (NullPointerException e) {
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			final String errCode = ErrorCode.map.get("Null pointer Exception_AppConfig-service");
 			return AppUtil.createApiResponse(false,
 					"Something went wrong. Please try after sometimeCode(" + errCode + ")", (Object) null);
 		} catch (HttpClientErrorException e) {
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			final String errCode = ErrorCode.map.get(res.getStatusCode());
 			return AppUtil.createApiResponse(false,
 					"Something went wrong. Please try after sometimeCode(" + errCode + ")", (Object) null);
 		} catch (HttpServerErrorException e) {
 
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			final String errCode = ErrorCode.map.get(res.getStatusCode());
 			return AppUtil.createApiResponse(false,
 					"Something went wrong. Please try after sometimeCode(" + errCode + ")", (Object) null);
 		}catch (Exception e) {
 
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			final String errCode = ErrorCode.map.get("EXCEPTION_AppConfigService");
 			return AppUtil.createApiResponse(false, "Something went wrong.Please try after (" + errCode + ")",
 					(Object) null);
@@ -263,7 +270,7 @@ public class DataFrameService {
 				return r;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			System.out.println(e);
 			System.out.println(e.getCause());
 			throw new Exception(e);

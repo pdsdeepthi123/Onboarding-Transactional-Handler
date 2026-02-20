@@ -35,7 +35,7 @@ import org.slf4j.LoggerFactory;
  */
 public class ConsentService {
 
-    private static Logger logger = LoggerFactory.getLogger(ConsentService.class);
+    private static Logger log = LoggerFactory.getLogger(ConsentService.class);
 
     /** The Constant CLASS. */
     final static String CLASS = "ConsentService";
@@ -67,14 +67,14 @@ public class ConsentService {
             return exceptionHandlerUtil.handleResponse(res);
 
 		} catch (HttpClientErrorException e) {
-            e.printStackTrace();
+            log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleHttpException(e);
 		} catch (HttpServerErrorException e) {
-            e.printStackTrace();
+            log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleHttpException(e);
-		} catch (ResourceAccessException e) {e.printStackTrace();
+		} catch (ResourceAccessException e) {log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleResourceAccessException(e);
-		} catch (Exception e) {e.printStackTrace();
+		} catch (Exception e) {log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleGenericException(e);
 		}
 	}
@@ -97,13 +97,13 @@ public class ConsentService {
             res = application.restTemplate().exchange(url, HttpMethod.GET, requestEntity, ApiResponse.class);
             return exceptionHandlerUtil.handleResponse(res);
 
-		} catch (HttpClientErrorException e) {e.printStackTrace();
+		} catch (HttpClientErrorException e) {log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleHttpException(e);
-		} catch (HttpServerErrorException e) {e.printStackTrace();
+		} catch (HttpServerErrorException e) {log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleHttpException(e);
-		} catch (ResourceAccessException e) {e.printStackTrace();
+		} catch (ResourceAccessException e) {log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleResourceAccessException(e);
-		} catch (Exception e) {e.printStackTrace();
+		} catch (Exception e) {log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleGenericException(e);
 		}
     }
@@ -121,13 +121,13 @@ public class ConsentService {
             return exceptionHandlerUtil.handleResponse(res);
 
 		} catch (HttpClientErrorException e) {
-            e.printStackTrace();
+            log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleHttpException(e);
-		} catch (HttpServerErrorException e) {e.printStackTrace();
+		} catch (HttpServerErrorException e) {log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleHttpException(e);
-		} catch (ResourceAccessException e) {e.printStackTrace();
+		} catch (ResourceAccessException e) {log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleResourceAccessException(e);
-		} catch (Exception e) {e.printStackTrace();
+		} catch (Exception e) {log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleGenericException(e);
 		}
     }
@@ -144,13 +144,13 @@ public class ConsentService {
             res = application.restTemplate.exchange(url, HttpMethod.GET, requestEntity, ApiResponse.class);
             return exceptionHandlerUtil.handleResponse(res);
 
-		} catch (HttpClientErrorException e) {e.printStackTrace();
+		} catch (HttpClientErrorException e) {log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleHttpException(e);
-		} catch (HttpServerErrorException e) {e.printStackTrace();
+		} catch (HttpServerErrorException e) {log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleHttpException(e);
-		} catch (ResourceAccessException e) {e.printStackTrace();
+		} catch (ResourceAccessException e) {log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleResourceAccessException(e);
-		} catch (Exception e) {e.printStackTrace();
+		} catch (Exception e) {log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleGenericException(e);
 		}
     }
@@ -167,13 +167,13 @@ public class ConsentService {
             res = application.restTemplate.exchange(url, HttpMethod.GET, requestEntity, ApiResponse.class);
             return exceptionHandlerUtil.handleResponse(res);
 
-		} catch (HttpClientErrorException e) {e.printStackTrace();
+		} catch (HttpClientErrorException e) {log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleHttpException(e);
-		} catch (HttpServerErrorException e) {e.printStackTrace();
+		} catch (HttpServerErrorException e) {log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleHttpException(e);
-		} catch (ResourceAccessException e) {e.printStackTrace();
+		} catch (ResourceAccessException e) {log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleResourceAccessException(e);
-		} catch (Exception e) {e.printStackTrace();
+		} catch (Exception e) {log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleGenericException(e);
 		}
     }
@@ -189,13 +189,13 @@ public class ConsentService {
             res = application.restTemplate.exchange(url, HttpMethod.GET, requestEntity, ApiResponse.class);
             return exceptionHandlerUtil.handleResponse(res);
 
-		} catch (HttpClientErrorException e) {e.printStackTrace();
+		} catch (HttpClientErrorException e) {log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleHttpException(e);
-		} catch (HttpServerErrorException e) {e.printStackTrace();
+		} catch (HttpServerErrorException e) {log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleHttpException(e);
-		} catch (ResourceAccessException e) {e.printStackTrace();
+		} catch (ResourceAccessException e) {log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleResourceAccessException(e);
-		} catch (Exception e) {e.printStackTrace();
+		} catch (Exception e) {log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleGenericException(e);
 		}
     }
@@ -214,13 +214,13 @@ public class ConsentService {
             res = application.restTemplate.exchange(url, HttpMethod.POST, requestEntity, ApiResponse.class);
             return exceptionHandlerUtil.handleResponse(res);
 
-		} catch (HttpClientErrorException e) {e.printStackTrace();
+		} catch (HttpClientErrorException e) {log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleHttpException(e);
-		} catch (HttpServerErrorException e) {e.printStackTrace();
+		} catch (HttpServerErrorException e) {log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleHttpException(e);
-		} catch (ResourceAccessException e) {e.printStackTrace();
+		} catch (ResourceAccessException e) {log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleResourceAccessException(e);
-		} catch (Exception e) {e.printStackTrace();
+		} catch (Exception e) {log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleGenericException(e);
 		}
     }

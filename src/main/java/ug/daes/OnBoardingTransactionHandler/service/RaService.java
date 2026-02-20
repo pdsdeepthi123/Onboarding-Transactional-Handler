@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
  */
 public class RaService {
 	
-	private static Logger logger = LoggerFactory.getLogger(RaService.class);
+	private static Logger log = LoggerFactory.getLogger(RaService.class);
 
 	/** The Constant CLASS. */
 	final static String CLASS = "RaService";
@@ -135,16 +135,16 @@ public class RaService {
 			return exceptionHandlerUtil.handleResponse(res);
 
 		} catch (HttpClientErrorException e) {
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleHttpException(e);
 		} catch (HttpServerErrorException e) {
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleHttpException(e);
 		} catch (ResourceAccessException e) {
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleResourceAccessException(e);
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleGenericException(e);
 		}
 	}
@@ -173,16 +173,16 @@ public class RaService {
 			return exceptionHandlerUtil.handleResponse(res);
 
 		} catch (HttpClientErrorException e) {
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleHttpException(e);
 		} catch (HttpServerErrorException e) {
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleHttpException(e);
 		} catch (ResourceAccessException e) {
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleResourceAccessException(e);
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleGenericException(e);
 		}
 	}
@@ -214,16 +214,16 @@ public class RaService {
 			return exceptionHandlerUtil.handleResponse(res);
 
 		} catch (HttpClientErrorException e) {
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleHttpException(e);
 		} catch (HttpServerErrorException e) {
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleHttpException(e);
 		} catch (ResourceAccessException e) {
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleResourceAccessException(e);
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleGenericException(e);
 		}
 	}

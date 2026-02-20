@@ -25,7 +25,7 @@ import ug.daes.OnBoardingTransactionHandler.util.PropertiesUtil;
 public class    ProposedOnboardingService {
 
 
-    private static Logger logger = LoggerFactory.getLogger(OrganizationService.class);
+    private static Logger log= LoggerFactory.getLogger(OrganizationService.class);
 
     /** The Constant CLASS. */
     final static String CLASS = "ProposedOnboardingService";
@@ -64,16 +64,16 @@ public class    ProposedOnboardingService {
             return exceptionHandlerUtil.handleResponse(res);
 
 		} catch (HttpClientErrorException e) {
-            e.printStackTrace();
+            log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleHttpException(e);
 		} catch (HttpServerErrorException e) {
-            e.printStackTrace();
+            log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleHttpException(e);
 		} catch (ResourceAccessException e) {
-            e.printStackTrace();
+            log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleResourceAccessException(e);
 		} catch (Exception e) {
-            e.printStackTrace();
+            log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleGenericException(e);
 		}
     }
@@ -192,7 +192,7 @@ public class    ProposedOnboardingService {
         ResponseEntity<ApiResponse> res = null;
         try {
 
-            logger.info(CLASS+"getPreferredTitles req with time 1 {}",AppUtil.getDate());
+            log.info(CLASS+"getPreferredTitles req with time 1 {}",AppUtil.getDate());
             String url = baseUrl + "/api/get/preferredTitle";
 
             HttpHeaders headers = new HttpHeaders();

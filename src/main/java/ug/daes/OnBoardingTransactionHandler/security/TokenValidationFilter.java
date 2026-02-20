@@ -1,5 +1,7 @@
 package ug.daes.OnBoardingTransactionHandler.security;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -9,6 +11,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import ug.daes.OnBoardingTransactionHandler.service.ConsentService;
 import ug.daes.OnBoardingTransactionHandler.util.PropertiesUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +34,10 @@ import java.util.Collections;
 
 @Component
 public class TokenValidationFilter extends OncePerRequestFilter {
+    private static Logger log = LoggerFactory.getLogger(TokenValidationFilter.class);
+
+    /** The Constant CLASS. */
+    final static String CLASS = "TokenValidationFilter";
 
     @Autowired
     PropertiesUtil propertiesUtil;
@@ -111,7 +118,7 @@ public class TokenValidationFilter extends OncePerRequestFilter {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("Unexpected exception", e);
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Validation API unreachable");
             return;
         }

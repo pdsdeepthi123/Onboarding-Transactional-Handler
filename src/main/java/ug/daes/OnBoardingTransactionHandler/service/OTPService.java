@@ -38,7 +38,7 @@ import org.slf4j.LoggerFactory;
  */
 public class OTPService {
 
-	private static Logger logger = LoggerFactory.getLogger(OTPService.class);
+	private static Logger log = LoggerFactory.getLogger(OTPService.class);
 
 	/** The Constant CLASS. */
 	final static String CLASS = "OTPService";
@@ -127,16 +127,16 @@ public class OTPService {
 					ApiResponse.class);
 			return exceptionHandlerUtil.handleResponse(res);
 		} catch (HttpClientErrorException e) {
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleHttpException(e);
 		} catch (HttpServerErrorException e) {
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleHttpException(e);
 		} catch (ResourceAccessException e) {
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleResourceAccessException(e);
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleGenericException(e);
 		}
 	}
@@ -294,16 +294,16 @@ public class OTPService {
 
 			return exceptionHandlerUtil.handleResponse(res);
 		} catch (HttpClientErrorException e) {
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleHttpException(e);
 		} catch (HttpServerErrorException e) {
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleHttpException(e);
 		} catch (ResourceAccessException e) {
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleResourceAccessException(e);
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleGenericException(e);
 		}
 	}
@@ -340,7 +340,7 @@ public class OTPService {
 	public ApiResponse getDeviceStatus(HttpHeaders httpHeaders,Object o) throws Exception {
 		ResponseEntity<ApiResponse> res = null;
 		try {
-			logger.info(CLASS+" saveSubscriberDetails req with time 1 {},{}");
+			log.info(CLASS+" saveSubscriberDetails req with time 1 {},{}");
 			String url = baseUrl + "/api/get/devicestatus";
 			System.out.println(url);
 			HttpHeaders headers = HeaderUtil.createHeaders(httpHeaders);
@@ -349,16 +349,16 @@ public class OTPService {
 					ApiResponse.class);
 			return exceptionHandlerUtil.handleResponse(res);
 		} catch (HttpClientErrorException e) {
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleHttpException(e);
 		} catch (HttpServerErrorException e) {
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleHttpException(e);
 		} catch (ResourceAccessException e) {
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleResourceAccessException(e);
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleGenericException(e);
 		}
 	}

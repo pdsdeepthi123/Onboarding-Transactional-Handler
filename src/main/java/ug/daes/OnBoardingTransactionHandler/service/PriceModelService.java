@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
 
 public class PriceModelService {
 	
-	private static Logger logger = LoggerFactory.getLogger(PriceModelService.class);
+	private static Logger log = LoggerFactory.getLogger(PriceModelService.class);
 
 	/** The Constant CLASS. */
 	final static String CLASS = "PriceModelService";
@@ -62,16 +62,16 @@ public class PriceModelService {
 			return exceptionHandlerUtil.handleResponse(res);
 
 		} catch (HttpClientErrorException e) {
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleHttpException(e);
 		} catch (HttpServerErrorException e) {
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleHttpException(e);
 		} catch (ResourceAccessException e) {
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleResourceAccessException(e);
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleGenericException(e);
 		}
 	}
@@ -83,7 +83,7 @@ public class PriceModelService {
 			String s = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(o);
 			recordDto = objectMapper.readValue(s, RecordDto.class);
 			
-			logger.info(CLASS+" getRemCredits req with time 1 {},{}",(String) recordDto.getSuid(),AppUtil.getDate());
+			log.info(CLASS+" getRemCredits req with time 1 {},{}",(String) recordDto.getSuid(),AppUtil.getDate());
 			String url = baseUrl + "/api/get/remaining-credits?suid=" + (String) recordDto.getSuid();
 			RestTemplate rest = new RestTemplate();
 			

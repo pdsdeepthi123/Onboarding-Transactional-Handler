@@ -33,7 +33,7 @@ import org.slf4j.LoggerFactory;
  */
 public class DeleteService {
 	
-	private static Logger logger = LoggerFactory.getLogger(DeleteService.class);
+	private static Logger log = LoggerFactory.getLogger(DeleteService.class);
 
 	/** The Constant CLASS. */
 	final static String CLASS = "DeleteService";
@@ -66,16 +66,16 @@ public class DeleteService {
 			return exceptionHandlerUtil.handleResponse(res);
 
 		} catch (HttpClientErrorException e) {
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleHttpException(e);
 		} catch (HttpServerErrorException e) {
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleHttpException(e);
 		} catch (ResourceAccessException e) {
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleResourceAccessException(e);
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("Unexpected exception", e);
 			return exceptionHandlerUtil.handleGenericException(e);
 		}
 
