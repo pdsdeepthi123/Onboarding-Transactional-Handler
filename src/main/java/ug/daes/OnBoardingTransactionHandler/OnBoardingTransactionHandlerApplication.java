@@ -1,24 +1,17 @@
 package ug.daes.OnBoardingTransactionHandler;
 
-import java.security.KeyManagementException;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.cert.X509Certificate;
-
-import javax.net.ssl.SSLContext;
-import org.jasypt.encryption.StringEncryptor;
-
-import org.jasypt.encryption.StringEncryptor;
-import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
-import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
 
 
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.conn.ssl.TrustStrategy;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.hc.client5.http.config.RequestConfig;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
+import org.apache.hc.core5.util.TimeValue;
+import org.apache.hc.core5.util.Timeout;
+
+
+
+
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -41,75 +34,26 @@ public class OnBoardingTransactionHandlerApplication {
         SpringApplication.run(OnBoardingTransactionHandlerApplication.class, args);
     }
 
-//    @Bean
-//    public RestTemplate restTemplate() throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
-//
-//        TrustStrategy acceptingTrustStrategy = (X509Certificate[] chain, String authType) -> true;
-//
-//        SSLContext sslContext = org.apache.http.ssl.SSLContexts.custom()
-//                .loadTrustMaterial(null, acceptingTrustStrategy)
-//                .build();
-//
-//        SSLConnectionSocketFactory csf = new SSLConnectionSocketFactory(sslContext);
-//
-//
-//        RequestConfig config = RequestConfig.custom()
-//                .setConnectionRequestTimeout(300000)
-//                .setConnectTimeout(300000)
-//                .setSocketTimeout(300000)
-//                .build();
-//
-//        CloseableHttpClient httpClient = HttpClientBuilder.create()
-//                .setDefaultRequestConfig(config)
-//                .setSSLSocketFactory(csf)
-//                .build();
-//
-//        HttpComponentsClientHttpRequestFactory requestFactory =
-//                new HttpComponentsClientHttpRequestFactory();
-//
-//        RestTemplate restTemplate = new RestTemplate(requestFactory);
-//        OnBoardingTransactionHandlerApplication.restTemplate = restTemplate;
-//        return restTemplate;
-//    }
-
 
     @Bean
     public RestTemplate restTemplate() {
 
-        RequestConfig config = RequestConfig.custom()
-                .setConnectionRequestTimeout(300000)
-                .setConnectTimeout(300000)
-                .setSocketTimeout(300000)
+        RequestConfig requestConfig = RequestConfig.custom()
+                .setConnectionRequestTimeout(Timeout.ofSeconds(10))
+                .setConnectTimeout(Timeout.ofSeconds(10))
+                .setResponseTimeout(Timeout.ofSeconds(30))
                 .build();
 
-
-
-        CloseableHttpClient httpClient = HttpClientBuilder.create()
-                .setDefaultRequestConfig(config)
-
+        CloseableHttpClient httpClient = HttpClients.custom()
+                .setDefaultRequestConfig(requestConfig)
+                .evictExpiredConnections()
+                .evictIdleConnections(TimeValue.ofMinutes(1))
                 .build();
 
         HttpComponentsClientHttpRequestFactory requestFactory =
-                new HttpComponentsClientHttpRequestFactory();
+                new HttpComponentsClientHttpRequestFactory(httpClient);
 
-        RestTemplate restTemplate = new RestTemplate(requestFactory);
-        OnBoardingTransactionHandlerApplication.restTemplate = restTemplate;
-        return restTemplate;
+        return new RestTemplate(requestFactory);
     }
 
-    @Bean("jasyptStringEncryptor")
-    public StringEncryptor stringEncryptor() {
-        PooledPBEStringEncryptor encryptor = new PooledPBEStringEncryptor();
-        SimpleStringPBEConfig config = new SimpleStringPBEConfig();
-        config.setPassword("$DttKycImplEngin@@r");
-        config.setAlgorithm("PBEWithHMACSHA512AndAES_256");
-        config.setKeyObtentionIterations("1000");
-        config.setPoolSize(4);
-        config.setProviderName("SunJCE");
-        config.setSaltGeneratorClassName("org.jasypt.salt.RandomSaltGenerator");
-        config.setIvGeneratorClassName("org.jasypt.iv.RandomIvGenerator");
-        config.setStringOutputType("base64");
-        encryptor.setConfig(config);
-        return encryptor;
-    }
 }
