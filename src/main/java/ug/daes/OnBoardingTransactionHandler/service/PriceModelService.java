@@ -85,12 +85,12 @@ public class PriceModelService {
 			
 			log.info(CLASS+" getRemCredits req with time 1 {},{}",(String) recordDto.getSuid(),AppUtil.getDate());
 			String url = baseUrl + "/api/get/remaining-credits?suid=" + (String) recordDto.getSuid();
-			RestTemplate rest = new RestTemplate();
+
 			
 			HttpHeaders headers = HeaderUtil.createHeaders(httpHeaders);
 			
 			HttpEntity<Object> requestEntity = new HttpEntity<>(headers);
-			res = rest.exchange(url, HttpMethod.GET, requestEntity, ApiResponse.class);
+			res = application.restTemplate.exchange(url, HttpMethod.GET, requestEntity, ApiResponse.class);
 			
 			return exceptionHandlerUtil.handleResponse(res);
 
